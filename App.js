@@ -13,6 +13,9 @@ export default function App() {
   // It is a blank string by default and set using the enteredGoalText function
   const [enteredGoalText, setEnteredGoalText] = useState("");
 
+  // Use a state hook to update the course goals
+  const [courseGoals, setCourseGoals] = useState([]);
+
 
   // This function gets executed whenever the text in the input changes
   function goalInputHandler(enteredText) {
@@ -21,20 +24,22 @@ export default function App() {
     setEnteredGoalText(enteredText);
   };
 
-
   // This function gets executed when the "Add Goal" button is pressed
   function addGoalHandler() {
 
-    // Pritn the entered text
-    console.log(enteredGoalText);
+    // Update the courseGoals array by appending the new goal
+    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, enteredGoalText]);
   };
 
 
 
   // Return the Main App component
   return (
+
+    /* Main app container */
     <View style={styles.appContainer}>
 
+      {/* Text and button container */}
       <View style={styles.inputContainer}>
 
         {/* When text is entered, call the goalInputHandler function */}
@@ -48,8 +53,11 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
 
+      {/* Goal container */}
       <View style={styles.goalsContainer}>
-        <Text>List of goals...</Text>
+        {courseGoals.map((goal) => <Text style={styles.goalItem} key={goal}>
+          {goal}
+        </Text>)}
       </View>
       
     </View>
@@ -95,6 +103,15 @@ const styles = StyleSheet.create({
   goalsContainer: {
     flex: 5,
     backgroundColor: "lightyellow"
+  },
+
+  /* Individual goal text */
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
+    color: "white"
   }
 });
 
