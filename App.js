@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Import components (like StatusBar, Text etc) from libraries 
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 
 
@@ -55,14 +55,16 @@ export default function App() {
 
       {/* Goal container */}
       <View style={styles.goalsContainer}>
+        <ScrollView alwaysBounceVertical={false}>
 
-        {/* Display all of the goals using the map function */}
-        {courseGoals.map((goal) => 
-          <View key={goal} style={styles.goalItem}>
-            <Text style={styles.goalText}>{goal}</Text>
-          </View>
-        )}
+          {/* Display all of the goals using the map function */}
+          {courseGoals.map((goal) => 
+            <View key={goal} style={styles.goalItem}>
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          )}
 
+        </ScrollView>
       </View>
     </View>
   );
