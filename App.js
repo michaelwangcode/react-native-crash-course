@@ -1,3 +1,6 @@
+// Import state hook
+import { useState } from 'react';
+
 // Import components (like StatusBar, Text etc) from libraries 
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
@@ -5,12 +8,44 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 // Main App
 export default function App() {
+
+  // Use a state hook to store the entered text
+  // It is a blank string by default and set using the enteredGoalText function
+  const [enteredGoalText, setEnteredGoalText] = useState("");
+
+
+  // This function gets executed whenever the text in the input changes
+  function goalInputHandler(enteredText) {
+
+    // Set the goal text to the text in the input
+    setEnteredGoalText(enteredText);
+  };
+
+
+  // This function gets executed when the "Add Goal" button is pressed
+  function addGoalHandler() {
+
+    // Pritn the entered text
+    console.log(enteredGoalText);
+  };
+
+
+
+  // Return the Main App component
   return (
     <View style={styles.appContainer}>
 
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder="Your course goal!" />
-        <Button title="Add Goal" />
+
+        {/* When text is entered, call the goalInputHandler function */}
+        <TextInput 
+          style={styles.textInput} 
+          placeholder="Your course goal!" 
+          onChangeText={goalInputHandler}
+        />
+
+        {/* When button is pressed, call the addGoalHandler function */}
+        <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
 
       <View style={styles.goalsContainer}>
