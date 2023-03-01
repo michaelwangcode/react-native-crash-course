@@ -55,11 +55,15 @@ export default function App() {
 
       {/* Goal container */}
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal) => <Text style={styles.goalItem} key={goal}>
-          {goal}
-        </Text>)}
+
+        {/* Display all of the goals using the map function */}
+        {courseGoals.map((goal) => 
+          <View key={goal} style={styles.goalItem}>
+            <Text style={styles.goalText}>{goal}</Text>
+          </View>
+        )}
+
       </View>
-      
     </View>
   );
 }
@@ -105,13 +109,18 @@ const styles = StyleSheet.create({
     backgroundColor: "lightyellow"
   },
 
-  /* Individual goal text */
+  /* Container for individual goal */
   goalItem: {
     margin: 8,
     padding: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
+  },
+
+  /* Individual text */
+  goalText: {
     color: "white"
   }
+
 });
 
