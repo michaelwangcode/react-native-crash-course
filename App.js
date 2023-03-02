@@ -2,7 +2,10 @@
 import { useState } from 'react';
 
 // Import components (like StatusBar, Text etc) from libraries 
-import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
+import { StyleSheet, View, Button, TextInput, FlatList } from 'react-native';
+
+// Import the GoalItem component from GoalItem.js
+import GoalItem from "./components/GoalItem";
 
 
 
@@ -59,21 +62,25 @@ export default function App() {
       {/* Goal container */}
       <View style={styles.goalsContainer}>
 
-        {/* Use FlatList to display list of goals*/}
+        {/* Use FlatList component to display list of goals*/}
         <FlatList 
+
+          /* Pass the courseGoals array as data */
           data={courseGoals} 
+
+          /* Pass the GoalItem component with the item data */
           renderItem={(itemData) => {
-            return (
-              /* Return the item component */
-              <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{itemData.item.text}</Text>
-              </View>
-            );
+
+            /* Use our own GoalItem component, pass in text prop */
+            return <GoalItem text={itemData.item.text} />
           }} 
+
           /* KeyExtractor lets us use the item id as a key */
           keyExtractor={(item, index) => {
             return item.id;
           }}
+
+          /* Disable bounce on scroll */
           alwaysBounceVertical={false} 
         />
 
@@ -84,7 +91,7 @@ export default function App() {
 
 
 
-// StyleSheet
+/* Style Sheet for App */
 const styles = StyleSheet.create({
 
   /* Container for the entire app */
@@ -122,19 +129,6 @@ const styles = StyleSheet.create({
     flex: 5,
     backgroundColor: "lightyellow"
   },
-
-  /* Container for individual goal */
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#5e0acc",
-  },
-
-  /* Individual text */
-  goalText: {
-    color: "white"
-  }
 
 });
 
