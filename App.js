@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Import components (like StatusBar, Text etc) from libraries 
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
 
 
@@ -27,8 +27,11 @@ export default function App() {
   // This function gets executed when the "Add Goal" button is pressed
   function addGoalHandler() {
 
-    // Update the courseGoals array by appending the new goal
-    setCourseGoals((currentCourseGoals) => [...currentCourseGoals, enteredGoalText]);
+    // Update the courseGoals array by appending the new goal, which consists of text and a key
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals, 
+      { text: enteredGoalText, id: Math.random().toString() },
+    ]);
   };
 
 
@@ -55,16 +58,25 @@ export default function App() {
 
       {/* Goal container */}
       <View style={styles.goalsContainer}>
-        <ScrollView alwaysBounceVertical={false}>
 
-          {/* Display all of the goals using the map function */}
-          {courseGoals.map((goal) => 
-            <View key={goal} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          )}
+        {/* Use FlatList to display list of goals*/}
+        <FlatList 
+          data={courseGoals} 
+          renderItem={(itemData) => {
+            return (
+              /* Return the item component */
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }} 
+          /* KeyExtractor lets us use the item id as a key */
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+          alwaysBounceVertical={false} 
+        />
 
-        </ScrollView>
       </View>
     </View>
   );
