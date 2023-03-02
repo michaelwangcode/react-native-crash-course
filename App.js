@@ -7,28 +7,21 @@ import { StyleSheet, View, Button, TextInput, FlatList } from 'react-native';
 // Import the GoalItem component from GoalItem.js
 import GoalItem from "./components/GoalItem";
 
+// Import the GoalInput component from GoalItem.js
+import GoalInput from "./components/GoalInput";
+
+
 
 
 // Main App
 export default function App() {
 
-  // Use a state hook to store the entered text
-  // It is a blank string by default and set using the enteredGoalText function
-  const [enteredGoalText, setEnteredGoalText] = useState("");
-
   // Use a state hook to update the course goals
   const [courseGoals, setCourseGoals] = useState([]);
 
 
-  // This function gets executed whenever the text in the input changes
-  function goalInputHandler(enteredText) {
-
-    // Set the goal text to the text in the input
-    setEnteredGoalText(enteredText);
-  };
-
   // This function gets executed when the "Add Goal" button is pressed
-  function addGoalHandler() {
+  function addGoalHandler(enteredGoalText) {
 
     // Update the courseGoals array by appending the new goal, which consists of text and a key
     setCourseGoals((currentCourseGoals) => [
@@ -38,31 +31,20 @@ export default function App() {
   };
 
 
-
   // Return the Main App component
   return (
 
     /* Main app container */
     <View style={styles.appContainer}>
 
-      {/* Text and button container */}
-      <View style={styles.inputContainer}>
+      {/* Use our own GoalInput component for getting text input */}
+      <GoalInput onAddGoal={addGoalHandler} />
 
-        {/* When text is entered, call the goalInputHandler function */}
-        <TextInput 
-          style={styles.textInput} 
-          placeholder="Your course goal!" 
-          onChangeText={goalInputHandler}
-        />
-
-        {/* When button is pressed, call the addGoalHandler function */}
-        <Button title="Add Goal" onPress={addGoalHandler} />
-      </View>
 
       {/* Goal container */}
       <View style={styles.goalsContainer}>
 
-        {/* Use FlatList component to display list of goals*/}
+        {/* Use FlatList component to display list of goals */}
         <FlatList 
 
           /* Pass the courseGoals array as data */
@@ -100,28 +82,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
     backgroundColor: "aliceblue"
-  },
-
-  /* Container with text input and button */
-  inputContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-    backgroundColor: "lightblue"
-  },
-
-  /* Text input field */
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-    backgroundColor: "antiquewhite"
   },
 
   /* Container with goals */
