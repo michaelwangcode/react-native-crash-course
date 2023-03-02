@@ -10,7 +10,8 @@ function GoalItem(props) {
   // Return the GoalItem component
   return (
 
-    <Pressable onPress={props.onDeleteItem}>
+    /* Use the Pressable component to perform actions when the view is pressed */
+    <Pressable onPress={props.onDeleteItem.bind(this, props.id)}>
       <View style={styles.goalItem}>
         <Text style={styles.goalText}>{props.text}</Text>
       </View>

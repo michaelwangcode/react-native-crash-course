@@ -32,8 +32,13 @@ export default function App() {
 
 
   // This function gets executed when a goal is pressed and will be deleted
-  function deleteGoalHandler() {
-    console.log("DELETE");
+  // It takes the id of the item to be deleted
+  function deleteGoalHandler(id) {
+
+    // Remove the goal with the given id value
+    setCourseGoals(currentCourseGoals => {
+      return currentCourseGoals.filter((goal) => goal.id !== id);
+    });
   }
 
 
@@ -60,8 +65,14 @@ export default function App() {
           /* Pass the GoalItem component with the item data */
           renderItem={(itemData) => {
 
-            /* Use our own GoalItem component, pass in text prop and onDeleteItem prop */
-            return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler} />
+            /* Use our own GoalItem component with props */
+            return (
+              <GoalItem 
+                text={itemData.item.text} 
+                id={itemData.item.id}
+                onDeleteItem={deleteGoalHandler} 
+              />
+            );
           }} 
 
           /* KeyExtractor lets us use the item id as a key */
