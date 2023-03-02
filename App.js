@@ -31,6 +31,13 @@ export default function App() {
   };
 
 
+  // This function gets executed when a goal is pressed and will be deleted
+  function deleteGoalHandler() {
+    console.log("DELETE");
+  }
+
+
+
   // Return the Main App component
   return (
 
@@ -53,8 +60,8 @@ export default function App() {
           /* Pass the GoalItem component with the item data */
           renderItem={(itemData) => {
 
-            /* Use our own GoalItem component, pass in text prop */
-            return <GoalItem text={itemData.item.text} />
+            /* Use our own GoalItem component, pass in text prop and onDeleteItem prop */
+            return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler} />
           }} 
 
           /* KeyExtractor lets us use the item id as a key */
