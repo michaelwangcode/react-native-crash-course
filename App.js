@@ -130,13 +130,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
-    backgroundColor: "aliceblue"
   },
 
   /* Container with goals */
   goalsContainer: {
     flex: 5,
-    backgroundColor: "lightyellow"
   },
 
 });

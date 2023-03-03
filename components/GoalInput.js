@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Import components
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal, Image } from "react-native";
 
 
 
@@ -44,6 +44,9 @@ function GoalInput(props) {
       {/* Text and button container */}
       <View style={styles.inputContainer}>
 
+        {/* Add Image */}
+        <Image style={styles.image} source={require("../assets/images/goal.png")} />
+
         {/* When text is entered, call the goalInputHandler function */}
         <TextInput 
           style={styles.textInput} 
@@ -84,11 +87,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-    backgroundColor: "lightblue"
+    backgroundColor: "#311b6b"
+  },
+
+  /* Image styles */
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20
   },
 
   /* Text input field */
@@ -97,7 +104,6 @@ const styles = StyleSheet.create({
     borderColor: "#cccccc",
     width: "100%",
     padding: 8,
-    backgroundColor: "antiquewhite"
   },
 
   /* Container for "Add Goal" and "Cancel" buttons */
