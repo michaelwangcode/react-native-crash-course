@@ -23,9 +23,15 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
 
-  // This function displays the modal when the button is clicked
+  // This function displays the modal when the "Add Goal" button is clicked
   function startAddGoalHandler() {
     setModalIsVisible(true);
+  }
+
+
+  // This function hides the modal when the "Cancel" button is clicked
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
   }
 
 
@@ -37,6 +43,9 @@ export default function App() {
       ...currentCourseGoals, 
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+
+    // Call the endAddGoalHandler function in GoalInput.js to close the modal
+    endAddGoalHandler();
   };
 
 
@@ -68,7 +77,11 @@ export default function App() {
 
 
       {/* Use our own GoalInput component for getting text input */}
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
+      <GoalInput 
+        visible={modalIsVisible} 
+        onAddGoal={addGoalHandler} 
+        onCancel={endAddGoalHandler} 
+      />
 
 
       {/* Goal container */}
