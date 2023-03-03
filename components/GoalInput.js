@@ -52,8 +52,21 @@ function GoalInput(props) {
           value={enteredGoalText}
         />
 
-        {/* When button is pressed, call the onAddGoal function passed down by App.js */}
-        <Button title="Add Goal" onPress={addGoalHandler} />
+        {/* Container for "Add Goal" and "Cancel" button */}
+        <View style={styles.buttonContainer}>
+
+          {/* Add Goal Button */}
+          <View style={styles.button}>
+            {/* When clicked, call the onAddGoal function passed down by App.js */}
+            <Button title="Add Goal" onPress={addGoalHandler} />
+          </View>
+
+          {/* Cancel Button */}
+          <View style={styles.button}>
+            <Button title="Cancel" />
+            </View>
+          </View>
+
       </View>
     </Modal>
   );
@@ -69,10 +82,10 @@ const styles = StyleSheet.create({
   /* Container with text input and button */
   inputContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
+    padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
     backgroundColor: "lightblue"
@@ -82,10 +95,22 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     padding: 8,
     backgroundColor: "antiquewhite"
   },
+
+  /* Container for "Add Goal" and "Cancel" buttons */
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+
+  /* Container for button styling */
+  button: {
+    width: 100,
+    marginHorizontal: 8,
+  }
+
 });
 
