@@ -4,6 +4,9 @@ import { useState } from 'react';
 // Import components (like StatusBar, Text etc) from libraries 
 import { StyleSheet, View, FlatList, Button } from 'react-native';
 
+// Import Status bar
+import { StatusBar } from "expo-status-bar";
+
 // Import the GoalItem component from GoalItem.js
 import GoalItem from "./components/GoalItem";
 
@@ -64,59 +67,62 @@ export default function App() {
   // Return the Main App component
   return (
 
-    /* Main app container */
-    <View style={styles.appContainer}>
+    <>
+      {/* Add status bar */}
+      <StatusBar style="light" />
 
+      {/* Main app container */}
+      <View style={styles.appContainer}>
 
-      {/* Add Goal button */}
-      <Button 
-        title="Add New Goal" 
-        color="#5e0acc" 
-        onPress={startAddGoalHandler}
-      />
-
-
-      {/* Use our own GoalInput component for getting text input */}
-      <GoalInput 
-        visible={modalIsVisible} 
-        onAddGoal={addGoalHandler} 
-        onCancel={endAddGoalHandler} 
-      />
-
-
-      {/* Goal container */}
-      <View style={styles.goalsContainer}>
-
-        {/* Use FlatList component to display list of goals */}
-        <FlatList 
-
-          /* Pass the courseGoals array as data */
-          data={courseGoals} 
-
-          /* Pass the GoalItem component with the item data */
-          renderItem={(itemData) => {
-
-            /* Use our own GoalItem component with props */
-            return (
-              <GoalItem 
-                text={itemData.item.text} 
-                id={itemData.item.id}
-                onDeleteItem={deleteGoalHandler} 
-              />
-            );
-          }} 
-
-          /* KeyExtractor lets us use the item id as a key */
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-
-          /* Disable bounce on scroll */
-          alwaysBounceVertical={false} 
+        {/* Add Goal button */}
+        <Button 
+          title="Add New Goal" 
+          color="#a065ec" 
+          onPress={startAddGoalHandler}
         />
 
+        {/* Use our own GoalInput component for getting text input */}
+        <GoalInput 
+          visible={modalIsVisible} 
+          onAddGoal={addGoalHandler} 
+          onCancel={endAddGoalHandler} 
+        />
+
+
+        {/* Goal container */}
+        <View style={styles.goalsContainer}>
+
+          {/* Use FlatList component to display list of goals */}
+          <FlatList 
+
+            /* Pass the courseGoals array as data */
+            data={courseGoals} 
+
+            /* Pass the GoalItem component with the item data */
+            renderItem={(itemData) => {
+
+              /* Use our own GoalItem component with props */
+              return (
+                <GoalItem 
+                  text={itemData.item.text} 
+                  id={itemData.item.id}
+                  onDeleteItem={deleteGoalHandler} 
+                />
+              );
+            }} 
+
+            /* KeyExtractor lets us use the item id as a key */
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+
+            /* Disable bounce on scroll */
+            alwaysBounceVertical={false} 
+          />
+
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -130,6 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
+    backgroundColor: "#1e085a"
   },
 
   /* Container with goals */
