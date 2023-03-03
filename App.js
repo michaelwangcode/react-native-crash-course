@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Import components (like StatusBar, Text etc) from libraries 
-import { StyleSheet, View, Button, TextInput, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Button } from 'react-native';
 
 // Import the GoalItem component from GoalItem.js
 import GoalItem from "./components/GoalItem";
@@ -16,8 +16,17 @@ import GoalInput from "./components/GoalInput";
 // Main App
 export default function App() {
 
+  // Use a state hook to update the modal visibility
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
   // Use a state hook to update the course goals
   const [courseGoals, setCourseGoals] = useState([]);
+
+
+  // This function displays the modal when the button is clicked
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
 
 
   // This function gets executed when the "Add Goal" button is pressed
@@ -49,8 +58,17 @@ export default function App() {
     /* Main app container */
     <View style={styles.appContainer}>
 
+
+      {/* Add Goal button */}
+      <Button 
+        title="Add New Goal" 
+        color="#5e0acc" 
+        onPress={startAddGoalHandler}
+      />
+
+
       {/* Use our own GoalInput component for getting text input */}
-      <GoalInput onAddGoal={addGoalHandler} />
+      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
 
 
       {/* Goal container */}
